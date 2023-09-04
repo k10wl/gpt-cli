@@ -1,24 +1,14 @@
 package main
 
 import (
-	"log"
-	"os"
-	"path/filepath"
-
-	input "cli/internal/input"
-
-	"github.com/joho/godotenv"
+	"cli/internal/initializers"
+	"cli/internal/input"
+	"cli/internal/session"
 )
 
 func main() {
-	exePath, err := os.Executable()
-	exeDir := filepath.Dir(exePath)
-	envPath := filepath.Join(exeDir, ".env")
-	err = godotenv.Load(envPath)
+	data := initializers.LoadAll()
 
-	if err != nil {
-		log.Fatalf("Error loading .env file")
-	}
-
-	input.Start()
+	s := session.NewSession(data)
+	input.Scan(s, data.Flags.Session)
 }
