@@ -7,8 +7,8 @@ import (
 )
 
 type Config struct {
-	Models []string          `json:"models"`
-	System map[string]string `json:"system"`
+	Models    []string          `json:"models"`
+	Assistant map[string]string `json:"assistant"`
 }
 
 func readConfigFile(flags *Flags) (*Config, error) {

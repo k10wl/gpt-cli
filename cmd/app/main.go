@@ -9,6 +9,6 @@ import (
 func main() {
 	data := initializers.LoadAll()
 
-	s := session.NewSession(data)
-	input.Scan(s, data.Flags.Session)
+	sessionReader := session.NewSession(data)
+	input.Scan(data, sessionReader)
 }

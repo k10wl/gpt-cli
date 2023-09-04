@@ -19,47 +19,47 @@ func TestLoad(t *testing.T) {
 		wantError bool
 	}{
 		{
-			name: "return model and system",
+			name: "return model and assistant",
 			flags: Flags{
-				Model:  "second",
-				System: "first",
-				Path:   mockDir,
+				Model:     "second",
+				Assistant: "first",
+				Path:      mockDir,
 			},
 			expected: Settings{
-				Model:  "second",
-				System: "first system message",
+				Model:     "second",
+				Assistant: "first assistant message",
 			},
 			wantError: false,
 		},
 		{
-			name: "return first model and empty system message in they where not specified by flag",
+			name: "return first model and empty assistant message in they where not specified by flag",
 			flags: Flags{
-				Model:  "",
-				System: "",
-				Path:   mockDir,
+				Model:     "",
+				Assistant: "",
+				Path:      mockDir,
 			},
 			expected: Settings{
-				Model:  "first",
-				System: "",
+				Model:     "first",
+				Assistant: "",
 			},
 			wantError: false,
 		},
 		{
 			name: "error if model does not exist",
 			flags: Flags{
-				Model:  "non existing",
-				System: "",
-				Path:   mockDir,
+				Model:     "non existing",
+				Assistant: "",
+				Path:      mockDir,
 			},
 			expected:  Settings{},
 			wantError: true,
 		},
 		{
-			name: "error if system does not exist",
+			name: "error if assistant does not exist",
 			flags: Flags{
-				Model:  "first",
-				System: "non existing",
-				Path:   mockDir,
+				Model:     "first",
+				Assistant: "non existing",
+				Path:      mockDir,
 			},
 			expected:  Settings{},
 			wantError: true,

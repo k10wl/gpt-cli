@@ -3,9 +3,9 @@
     "first",
     "second"
   ],
-  "system": {
-    "first": "first system message",
-    "second": "second system message" 
+  "assistant": {
+    "first": "first assistant message",
+    "second": "second assistant message" 
   }
 }
 

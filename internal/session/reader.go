@@ -17,16 +17,20 @@ type Current struct {
 }
 
 func NewSession(data *initializers.Initialized) *Current {
-	if data.Settings.System != "" {
-		cacheMessage(&gpt_client.Message{
-			Role:    "system",
-			Content: data.Settings.System,
-		})
+	if data.Settings.Assistant != "" {
+		applyAssistantMessage(data.Settings.Assistant)
 	}
 
 	return &Current{
 		*data,
 	}
+}
+
+func applyAssistantMessage(message string) {
+	cacheMessage(&gpt_client.Message{
+		Role:    "system",
+		Content: message,
+	})
 }
 
 func (c *Current) Respond(text string) string {

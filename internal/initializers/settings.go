@@ -6,8 +6,8 @@ import (
 )
 
 type Settings struct {
-	Model  string
-	System string
+	Model     string
+	Assistant string
 }
 
 func loadSettings(config *Config, flags *Flags) (*Settings, error) {
@@ -16,14 +16,14 @@ func loadSettings(config *Config, flags *Flags) (*Settings, error) {
 		return &Settings{}, err
 	}
 
-	system, err := getSystemMessage(config, flags)
+	system, err := getAssistantMessage(config, flags)
 	if err != nil {
 		return &Settings{}, err
 	}
 
 	return &Settings{
-		Model:  *model,
-		System: system,
+		Model:     *model,
+		Assistant: system,
 	}, nil
 }
 
@@ -50,25 +50,25 @@ func getModel(config *Config, flags *Flags) (*string, error) {
 	return &model, nil
 }
 
-func getSystemMessage(config *Config, flags *Flags) (string, error) {
-	system := flags.System
+func getAssistantMessage(config *Config, flags *Flags) (string, error) {
+	system := flags.Assistant
 
 	if system == "" {
 		return "", nil
 	}
 
-	message, exist := config.System[system]
+	message, exist := config.Assistant[system]
 	if !exist {
-		errorMessage := "Requested system message (" + message + ") is not supported. Available: " + listAvailableSystem(config)
+		errorMessage := "Requested system message (" + message + ") is not supported. Available: " + listAvailableAssistant(config)
 		return "", errors.New(errorMessage)
 	}
 
 	return message, nil
 }
 
-func listAvailableSystem(config *Config) string {
-	available := make([]string, 0, len(config.System))
-	for k := range config.System {
+func listAvailableAssistant(config *Config) string {
+	available := make([]string, 0, len(config.Assistant))
+	for k := range config.Assistant {
 		available = append(available, k)
 	}
 
