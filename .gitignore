@@ -1,3 +1,5 @@
 .env
 cmd/app/bin
 session.json
+bin
+.DS_Store
