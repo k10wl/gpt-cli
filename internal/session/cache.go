@@ -12,7 +12,7 @@ func updateCache(updated *[]gpt_client.Message) {
 	messagesCache = *updated
 }
 
-func cacheMessage(message *gpt_client.Message) *[]gpt_client.Message {
-	messagesCache = append(messagesCache, *message)
-	return &messagesCache
+func cacheMessage(message gpt_client.Message) []gpt_client.Message {
+	messagesCache = append(messagesCache, message)
+	return messagesCache
 }

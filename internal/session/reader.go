@@ -27,14 +27,14 @@ func NewSession(data *initializers.Initialized) *Current {
 }
 
 func applyAssistantMessage(message string) {
-	cacheMessage(&gpt_client.Message{
+	cacheMessage(gpt_client.Message{
 		Role:    "system",
 		Content: message,
 	})
 }
 
 func (c *Current) Respond(text string) string {
-	cacheMessage(&gpt_client.Message{Role: "user", Content: text})
+	cacheMessage(gpt_client.Message{Role: "user", Content: text})
 
 	history, err := c.GPTClient.BuildHistory(getCache())
 	if err != nil {
@@ -46,7 +46,7 @@ func (c *Current) Respond(text string) string {
 		log.Fatal(err)
 	}
 
-	cacheMessage(&res.Choices[0].Message)
+	cacheMessage(res.Choices[0].Message)
 
 	return res.Choices[0].Message.Content
 }
