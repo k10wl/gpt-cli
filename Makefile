@@ -1,2 +1,2 @@
 build:
-	go build -o bin cmd/app/main.go
+	go build -o gpt_cli cmd/app/main.go
