@@ -7,10 +7,11 @@ import (
 )
 
 type Flags struct {
-	Path      string
-	Assistant string
-	Session   bool
-	Restore   bool
+	Path           string
+	Assistant      string
+	Session        bool
+	Restore        bool
+	ListAssistants bool
 }
 
 func readFlags() *Flags {
@@ -37,12 +38,17 @@ func readFlags() *Flags {
 	flag.BoolVar(&restore, "restore", false, "restore last session if available")
 	flag.BoolVar(&restore, "r", false, "restore last session if available (shorthand)")
 
+	var listAssistants bool
+	flag.BoolVar(&listAssistants, "list-assistants", false, "list available assistants")
+	flag.BoolVar(&listAssistants, "la", false, "list available assistants (shorthand)")
+
 	flag.Parse()
 
 	return &Flags{
-		Path:      path,
-		Assistant: assistant,
-		Session:   session,
-		Restore:   restore,
+		Path:           path,
+		Assistant:      assistant,
+		Session:        session,
+		Restore:        restore,
+		ListAssistants: listAssistants,
 	}
 }

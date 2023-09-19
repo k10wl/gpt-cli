@@ -2,6 +2,7 @@ package config
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"os"
 	"path"
@@ -23,7 +24,7 @@ func getAssistantMessage(dir string, name string) string {
 
 	assistantMessage, exists := assistants[name]
 	if !exists {
-		log.Fatal("unknown assistant `" + name + "`, available assistants: " + strings.Join((*listAvailableAssistants(assistants)), "; "))
+		log.Fatal("unknown assistant `" + name + "`, available assistants: " + strings.Join((*mapAvailableAssistants(assistants)), "; "))
 	}
 
 	return assistantMessage
@@ -45,14 +46,24 @@ func assistantsReader(dir string) (map[string]string, error) {
 	return assistants, nil
 }
 
-func listAvailableAssistants(assistants map[string]string) *[]string {
-	list := make([]string, len(assistants))
+func printAssistants(dir string) {
+	assistants, err := assistantsReader(dir)
+	if err != nil {
+		log.Fatalf("%+v", err)
+	}
+	for key, value := range assistants {
+		fmt.Printf("- %s: %v\n\n", key, value)
+	}
+}
+
+func mapAvailableAssistants(assistants map[string]string) *[]string {
+	assistantsMap := make([]string, len(assistants))
 
 	i := 0
 	for key := range assistants {
-		list[i] = key
+		assistantsMap[i] = key
 		i = i + 1
 	}
 
-	return &list
+	return &assistantsMap
 }

@@ -1,0 +1,56 @@
+[x] fix critical bug with system prompts settings (out of bounds for completion)
+
+[x] on empty input show message: "press enter twice to prune conversation".
+    afterwards cleanup cache
+
+[ ] allow to paste code in app <- how???
+
+[x] display system message
+
+[ ] add shorthands for flags
+
+  - [x] -a -assistant <- set assistant model (system message config)
+
+  - [x] -s -session <- chain prompts
+  
+  - [ ] -m -model <- select model to complete
+
+  - [ ] -l -list <- list all available models or assistants
+
+  - [ ] -u -update <- make request to openai to update available models
+
+  - [ ] -debug <- debug mode. Maybe show cached or smth? not sure yet
+
+  - [ ] -t -temperature <- set temperature for answer
+
+  - [ ] -f -file <- reads file text content and sets that as system message
+
+  - [x] -r -restore <- restore last session cache
+
+[x] remove formatting from single completion (remove -> * * * * *)
+
+[x] update config loading to ignore models
+
+================================================================================
+
+guess how this was accomplished
+
+[x] research how to store API key
+
+[x] move prompt files to `.yaml` or `.json`. To prevent rebuilding
+    on prompt changes
+
+[x] for sessions add flag `-s`
+
+[x] make UI in session more clear, I'm getting lost in questions and
+    asnwers. Make  smth like:
+
+      ```
+      ================
+  
+      Q: user propmpt
+      A: completion
+
+      ================
+
+[x] NVIM support
